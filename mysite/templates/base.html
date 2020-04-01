@@ -1,0 +1,53 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{% static "style.css" %}">
+    <!-- <script src="{% static "jquery-3.4.1.min.js" %}"></script> -->
+    <script src="{% static "script.js" %}"></script>
+    <script src="{% static "echarts.min.js" %}"></script>
+    <script src="{% static "table2CSV.js" %}"></script>
+    
+    <title>质量评估平台</title>
+</head>
+
+<body>
+    <a href="{% url 'upload' %}" style='text-decoration: none;'>
+        <div class="header">
+            <h1>数据处理质量评估平台</h1>
+        </div>
+    </a>
+
+    <div id="nav">
+        <!-- 侧栏 -->
+        {% block nav %}{% endblock %}
+    </div>
+
+    <div id="form">
+        <!-- 提交界面 -->
+        {% block form %}{% endblock %}
+    </div>
+
+    <div id="manual">
+        <!-- 说明 -->
+        {% block manual %}{% endblock %}
+    </div>
+
+    <div id="score">
+        <!-- 打分表 -->
+        {% block score %}{% endblock %}
+    </div>
+
+    <div id="detail" hidden>
+        <!-- 详细信息表 -->
+        {% block detail %}{% endblock %}
+    </div>
+
+    <div id='result'>
+        <!-- 病人结果分布表 -->
+        {% block result %}{% endblock %}
+    </div>
+</body>
+</html>

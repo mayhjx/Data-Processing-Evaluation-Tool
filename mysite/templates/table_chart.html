@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block nav %}
+    <a href='{% url "upload" %}'}'>返回</a><br>
+{% endblock %}
+
+{%block form %}
+<form action={% url "show_table_chart" %} method="POST" class="form">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" Value='查询'>  
+</form>
+
+<br>
+{% endblock %}
+
+{% block result %}
+    <br>
+    <div id='chart'>{{ chart|safe }}</div>
+    <br>
+    
+    <div id='table'>
+        {% if table %}
+            <button on-click='download()'>导出表格</button>
+        {% endif %}
+        {{ table|safe }}
+    </div>
+{% endblock %}

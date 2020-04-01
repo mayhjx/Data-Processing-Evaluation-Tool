@@ -1,0 +1,520 @@
+{% extends "base.html" %}
+
+{% block nav %}
+    <a href='{% url "upload" %}'>返回</a><br>
+    <a href='/#score' onclick="showscore()">打分表</a><br>
+    <a href='/#detail' onclick="showdetail()">详细信息</a><br>
+    <!-- <a href='{% url "show_table_chart" %}'>VD结果分布</a><br> -->
+{% endblock %}
+
+{% block score %}
+<table>
+    <tr>
+        <th colspan="5">文件名：{{file}}</th>
+    </tr>
+    <tr>
+        <td></td>
+        <th>内容</th>
+        <th>MN</th>
+        <th>NMN</th>
+        <th>3-MT</th>
+    </tr>
+    <tr>
+        <td rowspan="2">定量</td>
+        <td>曲线回收率</td>
+        <!-- <td>{{ MN_accuracy.score }}</td>
+        <td>{{ NMN_accuracy.score }}</td>
+        <td>{{ MT_accuracy.score }}</td> -->
+        <td>
+            {% if MN_accuracy.score >= 8 %}
+            <span style='color: green'>合格</span>
+            {% else %}
+            <span style='color: red'>不合格</span>
+            {% endif %}
+        </td>
+        <td>
+            {% if NMN_accuracy.score >= 8 %}
+            <span style='color: green'>合格</span>
+            {% else %}
+            <span style='color: red'>不合格</span>
+            {% endif %}
+        </td>
+        <td>
+            {% if MT_accuracy.score >= 8 %}
+            <span style='color: green'>合格</span>
+            {% else %}
+            <span style='color: red'>不合格</span>
+            {% endif %}
+        </td>
+    </tr>
+    <tr>
+        <td>线性</td>
+        <!-- <td>{{ MN_r.score }}</td>
+        <td>{{ NMN_r.score }}</td>
+        <td>{{MT_r.score}}</td> -->
+        <td>
+            {% if MN_r.score >= 8 %}
+            <span style='color: green'>合格</span>
+            {% else %}
+            <span style='color: red'>不合格</span>
+            {% endif %}
+        </td>
+        <td>
+            {% if NMN_r.score >= 8 %}
+            <span style='color: green'>合格</span>
+            {% else %}
+            <span style='color: red'>不合格</span>
+            {% endif %}
+        </td>
+        <td>
+            {% if MT_r.score >= 8 %}
+            <span style='color: green'>合格</span>
+            {% else %}
+            <span style='color: red'>不合格</span>
+            {% endif %}
+        </td>
+    </tr>
+    <tr>
+        <td rowspan="5">性能</td>
+        <td>试剂空白</td>
+        <!-- <td>{{MN_LLMI.score}}</td>
+        <td>{{NMN_LLMI.score}}</td>
+        <td>{{MT_LLMI.score}}</td> -->
+        <td>
+            {% if MN_LLMI.score >= 8 %}
+            <span style='color: green'>合格</span>
+            {% else %}
+            <span style='color: red'>不合格</span>
+            {% endif %}
+        </td>
+        <td>
+            {% if NMN_LLMI.score >= 8 %}
+            <span style='color: green'>合格</span>
+            {% else %}
+            <span style='color: red'>不合格</span>
+            {% endif %}
+        </td>
+        <td>
+            {% if MT_LLMI.score >= 8 %}
+            <span style='color: green'>合格</span>
+            {% else %}
+            <span style='color: red'>不合格</span>
+            {% endif %}
+        </td>
+    </tr>
+    <tr>
+        <td>信噪比</td>
+        <!-- <td>{{MN_sn.score}}</td>
+        <td>{{NMN_sn.score}}</td>
+        <td>{{MT_sn.score}}</td> -->
+        <td>
+            {% if MN_sn.score >= 8 %}
+            <span style='color: green'>合格</span>
+            {% else %}
+            <span style='color: red'>不合格</span>
+            {% endif %}
+        </td>
+        <td>
+            {% if NMN_sn.score >= 8 %}
+            <span style='color: green'>合格</span>
+            {% else %}
+            <span style='color: red'>不合格</span>
+            {% endif %}
+        </td>
+        <td>
+            {% if MT_sn.score >= 8 %}
+            <span style='color: green'>合格</span>
+            {% else %}
+            <span style='color: red'>不合格</span>
+            {% endif %}
+        </td>
+    </tr>
+    <tr>
+        <td>内标响应</td>
+        <!-- <td>{{MN_isarea.score}}</td>
+        <td>{{NMN_isarea.score}}</td>
+        <td>{{MT_isarea.score}}</td> -->
+        <td>
+            {% if MN_isarea.score >= 8 %}
+            <span style='color: green'>合格</span>
+            {% else %}
+            <span style='color: red'>不合格</span>
+            {% endif %}
+        </td>
+        <td>
+            {% if NMN_isarea.score >= 8 %}
+            <span style='color: green'>合格</span>
+            {% else %}
+            <span style='color: red'>不合格</span>
+            {% endif %}
+        </td>
+        <td>
+            {% if MT_isarea.score >= 8 %}
+            <span style='color: green'>合格</span>
+            {% else %}
+            <span style='color: red'>不合格</span>
+            {% endif %}
+        </td>
+    </tr>
+    <tr>
+        <td>样品保留时间</td>
+        <!-- <td>{{MN_rt.score}}</td>
+        <td>{{NMN_rt.score}}</td>
+        <td>{{MT_rt.score}}</td> -->
+        <td>
+            {% if MN_rt.score >= 8 %}
+            <span style='color: green'>合格</span>
+            {% else %}
+            <span style='color: red'>不合格</span>
+            {% endif %}
+        </td>
+        <td>
+            {% if NMN_rt.score >= 8 %}
+            <span style='color: green'>合格</span>
+            {% else %}
+            <span style='color: red'>不合格</span>
+            {% endif %}
+        </td>
+        <td>
+            {% if MT_rt.score >= 8 %}
+            <span style='color: green'>合格</span>
+            {% else %}
+            <span style='color: red'>不合格</span>
+            {% endif %}
+        </td>
+    </tr>
+    <tr>
+        <td>内标保留时间</td>
+        <!-- <td>{{MN_isrt.score}}</td>
+        <td>{{NMN_isrt.score}}</td>
+        <td>{{MT_isrt.score}}</td> -->
+        <td>
+            {% if MN_isrt.score >= 8 %}
+            <span style='color: green'>合格</span>
+            {% else %}
+            <span style='color: red'>不合格</span>
+            {% endif %}
+        </td>
+        <td>
+            {% if NMN_isrt.score >= 8 %}
+            <span style='color: green'>合格</span>
+            {% else %}
+            <span style='color: red'>不合格</span>
+            {% endif %}
+        </td>
+        <td>
+            {% if MT_isrt.score >= 8 %}
+            <span style='color: green'>合格</span>
+            {% else %}
+            <span style='color: red'>不合格</span>
+            {% endif %}
+        </td>
+    </tr>
+    <tr>
+        <td rowspan="1">结果</td>
+        <td>质控</td>
+        <!-- <td>{{MN_qc.score}}</td>
+        <td>{{NMN_qc.score}}</td>
+        <td>{{MT_qc.score}}</td> -->
+        <td>
+            {% if MN_qc.score >= 8 %}
+            <span style='color: green'>合格</span>
+            {% else %}
+            <span style='color: red'>不合格</span>
+            {% endif %}
+        </td>
+        <td>
+            {% if NMN_qc.score >= 8 %}
+            <span style='color: green'>合格</span>
+            {% else %}
+            <span style='color: red'>不合格</span>
+            {% endif %}
+        </td>
+        <td>
+            {% if MT_qc.score >= 8 %}
+            <span style='color: green'>合格</span>
+            {% else %}
+            <span style='color: red'>不合格</span>
+            {% endif %}
+        </td>
+    </tr>
+    <!-- <tr>
+        <td colspan="2">总分</td>
+        <td>{{total_MN_score}}</td>
+        <td>{{total_NMN_score}}</td>
+        <td>{{total_MT_score}}</td>
+    </tr> -->
+</table>
+{% endblock %}
+
+
+{% block detail %}
+    <table>
+        <tr>
+            <th colspan="3">评分规则</th>
+            <th colspan="2">MN</th>
+            <th colspan="2">NMN</th>
+            <th colspan="2">3-MT</th>
+        </tr>
+        <tr>
+            <td></td>
+            <th>内容</th>
+            <th>标准</th>
+            <th>违反点</th>
+            <th>得分</th>
+            <th>违反点</th>
+            <th>得分</th>
+            <th>违反点</th>
+            <th>得分</th>
+        </tr>
+        <tr>
+            <td rowspan="2">定量</td>
+            <td>曲线回收率</td>
+            <td id="rule">
+                {{ accuracy_doc|linebreaks }}
+            </td>
+            <td>
+                <ul>
+                    {% for i in MN_accuracy.violation %}
+                        <li>{{i}}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>{{ MN_accuracy.score }}</td>
+            <td>
+                <ul>
+                    {% for i in NMN_accuracy.violation %}
+                        <li>{{i}}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>{{ NMN_accuracy.score }}</td>
+            <td>
+                <ul>
+                    {% for i in MT_accuracy.violation %}
+                        <li>{{i}}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>{{ MT_accuracy.score }}</td>
+        </tr>
+        <tr>
+            <td>线性</td>
+            <td id="rule">
+                {{ r_doc|linebreaks }}
+            </td>
+            <td>
+                <ul>
+                    {% for i in MN_r.violation %}
+                        <li>{{i}}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>{{ MN_r.score }}</td>
+            <td>
+                <ul>
+                    {% for i in NMN_r.violation %}
+                        <li>{{i}}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>{{ NMN_r.score }}</td>
+            <td>
+                <ul>
+                    {% for i in MT_r.violation %}
+                        <li>{{i}}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>{{ MT_r.score }}</td>
+        </tr>
+        <tr>
+            <td rowspan="5">性能</td>
+            <td>试剂空白</td>
+            <td id="rule">
+                {{ LLMI_doc|linebreaks }}
+            </td>
+            <td>
+                <ul>
+                    {% for i in MN_LLMI.violation %}
+                        <li>{{i}}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>{{MN_LLMI.score}}</td>
+            <td>
+                <ul>
+                    {% for i in NMN_LLMI.violation %}
+                        <li>{{i}}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>{{NMN_LLMI.score}}</td>
+            <td>
+                <ul>
+                    {% for i in MT_LLMI.violation %}
+                        <li>{{i}}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>{{MT_LLMI.score}}</td>
+        </tr>
+        <tr>
+            <td>信噪比</td>
+            <td id="rule">
+                {{ sn_doc|linebreaks }}
+            </td>
+            <td>
+                <ul>
+                    {% for i in MN_sn.violation %}
+                        <li>{{i}}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>{{MN_sn.score}}</td>
+            <td>
+                <ul>
+                    {% for i in NMN_sn.violation %}
+                        <li>{{i}}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>{{NMN_sn.score}}</td>
+            <td>
+                <ul>
+                    {% for i in MT_sn.violation %}
+                        <li>{{i}}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>{{MT_sn.score}}</td>
+        </tr>
+        <tr>
+            <td>内标响应</td>
+            <td id="rule">
+                {{ isarea_doc|linebreaks }}
+            </td>        
+            <td>
+                <ul>
+                    {% for i in MN_isarea.violation %}
+                        <li>{{i}}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>{{MN_isarea.score}}</td>
+            <td>
+                <ul>
+                    {% for i in NMN_isarea.violation %}
+                        <li>{{i}}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>{{NMN_isarea.score}}</td>
+            <td>
+                <ul>
+                    {% for i in MT_isarea.violation %}
+                        <li>{{i}}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>{{MT_isarea.score}}</td>
+        </tr>
+        <tr>
+            <td>样品保留时间</td>
+            <td id="rule">
+                {{ rt_doc|linebreaks }}
+            </td>
+            <td>
+                <ul>
+                    {% for i in MN_rt.violation %}
+                        <li>{{i}}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>{{MN_rt.score}}</td>
+            <td>
+                <ul>
+                    {% for i in NMN_rt.violation %}
+                        <li>{{i}}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>{{NMN_rt.score}}</td>
+            <td>
+                <ul>
+                    {% for i in MT_rt.violation %}
+                        <li>{{i}}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>{{MT_rt.score}}</td>
+        </tr>
+        <tr>
+            <td>内标保留时间</td>
+            <td id="rule">
+                {{ isrt_doc|linebreaks }}
+            </td>
+            <td>
+                <ul>
+                    {% for i in MN_isrt.violation %}
+                        <li>{{i}}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>{{MN_isrt.score}}</td>
+            <td>
+                <ul>
+                    {% for i in NMN_isrt.violation %}
+                        <li>{{i}}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>{{NMN_isrt.score}}</td>
+            <td>
+                <ul>
+                    {% for i in MT_isrt.violation %}
+                        <li>{{i}}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>{{MT_isrt.score}}</td>
+        </tr>
+        <tr>
+            <td>结果</td>
+            <td>质控</td>
+            <td id="rule">
+                {{ qc_doc|linebreaks }}
+            </td>
+            <td>
+                <ul>
+                    {% for i in MN_qc.violation %}
+                        <li>{{i}}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>{{MN_qc.score}}</td>
+            <td>
+                <ul>
+                    {% for i in NMN_qc.violation %}
+                        <li>{{i}}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>{{NMN_qc.score}}</td>
+            <td>
+                <ul>
+                    {% for i in MT_qc.violation %}
+                        <li>{{i}}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>{{MT_qc.score}}</td>
+        </tr>
+        <tr>
+            <td colspan="3">总分</td>
+            <td colspan="2">{{ total_MN_score }}</td>
+            <td colspan="2">{{ total_NMN_score }}</td>
+            <td colspan="2">{{ total_MT_score }}</td>
+        </tr>
+    </table>
+{% endblock %}

@@ -1,0 +1,800 @@
+{% extends "base.html" %}
+
+{% block nav %}
+    <a href='{% url "upload" %}'>返回</a><br>
+    <a href='javascript:void(0)' onclick="showscore()">打分表</a><br>
+    <a href='javascript:void(0)' onclick="showdetail()">详细信息</a><br>
+    <a href='{% url "show_table_chart" %}'>VD结果分布</a><br>
+{% endblock %}
+
+{% block score %}
+<table>
+    <tr>
+        <th colspan="5">文件名：{{file}}</th>
+    </tr>
+    <tr>
+        <td></td>
+        <th>内容</th>
+        <th>D2</th>
+        <th>D3</th>
+    </tr>
+    <tr>
+        <td rowspan="2">定量</td>
+        <td>曲线回收率</td>
+        <!-- <td>{{ d2_accuracy.score }}</td>
+        <td>{{ d3_accuracy.score }}</td> -->
+        <td>
+            {% if d2_accuracy.score >= 8 %}
+            <span style='color: green'>合格</span>
+            {% else %}
+            <span style='color: red'>不合格</span>
+            {% endif %}
+        </td>
+        <td>
+            {% if d3_accuracy.score >= 8 %}
+            <span style='color: green'>合格</span>
+            {% else %}
+            <span style='color: red'>不合格</span>
+            {% endif %}
+        </td>
+    </tr>
+    <tr>
+        <td>线性</td>
+        <!-- <td>{{ d2_r.score }}</td>
+        <td>{{ d3_r.score }}</td> -->
+        <td>
+            {% if d2_r.score >= 8 %}
+            <span style='color: green'>合格</span>
+            {% else %}
+            <span style='color: red'>不合格</span>
+            {% endif %}
+        </td>
+        <td>
+            {% if d3_r.score >= 8 %}
+            <span style='color: green'>合格</span>
+            {% else %}
+            <span style='color: red'>不合格</span>
+            {% endif %}
+        </td>
+    </tr>
+    <tr>
+        <td rowspan="6">性能</td>
+        <td>试剂空白</td>
+        <!-- <td>{{d2_LLMI.score}}</td>
+        <td>{{d3_LLMI.score}}</td> -->
+        <td>
+            {% if d2_LLMI.score >= 8 %}
+            <span style='color: green'>合格</span>
+            {% else %}
+            <span style='color: red'>不合格</span>
+            {% endif %}
+        </td>
+        <td>
+            {% if d3_LLMI.score >= 8 %}
+            <span style='color: green'>合格</span>
+            {% else %}
+            <span style='color: red'>不合格</span>
+            {% endif %}
+        </td>
+    </tr>
+    <tr>
+        <td>信噪比</td>
+        <!-- <td>{{d2_sn.score}}</td>
+        <td>{{d3_sn.score}}</td> -->
+        <td>
+            {% if d2_sn.score >= 8 %}
+            <span style='color: green'>合格</span>
+            {% else %}
+            <span style='color: red'>不合格</span>
+            {% endif %}
+        </td>
+        <td>
+            {% if d3_sn.score >= 8 %}
+            <span style='color: green'>合格</span>
+            {% else %}
+            <span style='color: red'>不合格</span>
+            {% endif %}
+        </td>
+    </tr>
+    <tr>
+        <td>Ion Ratio</td>
+        <td>{{ d2_Ion_Ratio.Pass_num }}/{{ d2_Ion_Ratio.greater_than_LOQ }}</td>
+        <td>{{ d3_Ion_Ratio.Pass_num }}/{{ d3_Ion_Ratio.greater_than_LOQ }}</td>
+    </tr>
+    <tr>
+        <td>内标响应</td>
+        <td>
+            <ul>
+                {% for plate in d2_isarea %}
+                    {% for num, value in plate.items %}
+                        <!-- <li>Plate{{ num }}: {{value.score}}</li> -->
+                        {% if value.score >= 8 %}
+                        <li>Plate{{ num }}: <span style='color: green'>合格</span></li>
+                        {% else %}
+                        <li>Plate{{ num }}: <span style='color: red'>不合格</span></li>
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
+            </ul>
+        </td>
+        <td>
+            <ul>
+                {% for plate in d3_isarea %}
+                    {% for num, value in plate.items %}
+                    {% if value.score >= 8 %}
+                    <li>Plate{{ num }}: <span style='color: green'>合格</span></li>
+                    {% else %}
+                    <li>Plate{{ num }}: <span style='color: red'>不合格</span></li>
+                    {% endif %}
+                    {% endfor %}
+                {% endfor %}
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>样品保留时间</td>
+        <td>
+            <ul>
+                {% for plate in d2_rt %}
+                    {% for num, value in plate.items %}
+                        {% if value.score >= 8 %}
+                        <li>Plate{{ num }}: <span style='color: green'>合格</span></li>
+                        {% else %}
+                        <li>Plate{{ num }}: <span style='color: red'>不合格</span></li>
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
+            </ul>
+        </td>
+        <td>
+            <ul>
+                {% for plate in d3_rt %}
+                    {% for num, value in plate.items %}
+                        {% if value.score >= 8 %}
+                        <li>Plate{{ num }}: <span style='color: green'>合格</span></li>
+                        {% else %}
+                        <li>Plate{{ num }}: <span style='color: red'>不合格</span></li>
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>内标保留时间</td>
+        <td>
+            <ul>
+                {% for plate in d2_isrt %}
+                    {% for num, value in plate.items %}
+                        {% if value.score >= 8 %}
+                        <li>Plate{{ num }}: <span style='color: green'>合格</span></li>
+                        {% else %}
+                        <li>Plate{{ num }}: <span style='color: red'>不合格</span></li>
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
+            </ul>
+        </td>
+        <td>
+            <ul>
+                {% for plate in d3_isrt %}
+                    {% for num, value in plate.items %}
+                        {% if value.score >= 8 %}
+                        <li>Plate{{ num }}: <span style='color: green'>合格</span></li>
+                        {% else %}
+                        <li>Plate{{ num }}: <span style='color: red'>不合格</span></li>
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td rowspan="3">结果</td>
+        <td>质控</td>
+        <td>
+            <ul>
+                {% for plate in d2_qc %}
+                    {% for num, value in plate.items %}
+                        {% if value.score >= 8 %}
+                        <li>Plate{{ num }}: <span style='color: green'>合格</span></li>
+                        {% else %}
+                        <li>Plate{{ num }}: <span style='color: red'>不合格</span></li>
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
+            </ul>
+        </td>
+        <td>
+            <ul>
+                {% for plate in d3_qc %}
+                    {% for num, value in plate.items %}
+                        {% if value.score >= 8 %}
+                        <li>Plate{{ num }}: <span style='color: green'>合格</span></li>
+                        {% else %}
+                        <li>Plate{{ num }}: <span style='color: red'>不合格</span></li>
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>定位孔</td>
+        <td>
+            <ul>
+                {% for plate in d2_locate %}
+                    {% for num, value in plate.items %}
+                        {% if value.score >= 8 %}
+                        <li>Plate{{ num }}: <span style='color: green'>合格</span></li>
+                        {% else %}
+                        <li>Plate{{ num }}: <span style='color: red'>不合格</span></li>
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
+            </ul>
+        </td>
+        <td>
+            <ul>
+                {% for plate in d3_locate %}
+                    {% for num, value in plate.items %}
+                        {% if value.score >= 8 %}
+                        <li>Plate{{ num }}: <span style='color: green'>合格</span></li>
+                        {% else %}
+                        <li>Plate{{ num }}: <span style='color: red'>不合格</span></li>
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
+            </ul>
+        </td>
+    </tr>
+    <tr >
+        <td>各板均值</td>
+        <td colspan='2'>
+            <ul>
+                {% for plate in patient_result %}
+                    {% for num, value in plate.items %}
+                        {% if value.score >= 8 %}
+                        <li>Plate{{ num }}: <span style='color: green'>合格</span></li>
+                        {% else %}
+                        <li>Plate{{ num }}: <span style='color: red'>不合格</span></li>
+                        {% endif %}
+                    {% endfor %}  
+                {% endfor %}
+            </ul>
+        </td>
+    </tr>
+    <!-- <tr>
+        <td colspan="2">总分</td>
+        <td>
+            <ul>
+                {% for line in d2_total_score %}
+                    {% for plate, score in line.items %}
+                        <li>Plate{{plate}}: {{score}}</li>
+                    {% endfor %}
+                {% endfor %}
+            </ul>
+        </td>
+        <td>
+            <ul>
+                {% for line in d3_total_score %}
+                    {% for plate, score in line.items %}
+                        <li>Plate{{plate}}: {{score}}</li>
+                    {% endfor %}
+                {% endfor %}
+            </ul>
+        </td>
+    </tr> -->
+</table>
+{% endblock %}
+
+{% block detail %}
+    <table>
+        <tr>
+            <th colspan="3">评分规则</th>
+            <th colspan="2">D2</th>
+            <th colspan="2">D3</th>
+        </tr>
+        <tr>
+            <td></td>
+            <th>内容</th>
+            <th>标准</th>
+            <th>违反点</th>
+            <th>得分</th>
+            <th>违反点</th>
+            <th>得分</th>
+        </tr>
+        <tr>
+            <td rowspan="2">定量</td>
+            <td>曲线回收率</td>
+            <td id="rule">
+                {{ accuracy_doc|linebreaks }}
+            </td>
+            <td>
+                <ul>
+                    {% for i in d2_accuracy.violation %}
+                        <li>{{i}}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>{{ d2_accuracy.score }}</td>
+            <td>
+                <ul>
+                    {% for i in d3_accuracy.violation %}
+                        <li>{{i}}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>{{ d3_accuracy.score }}</td>
+        </tr>
+        <tr>
+            <td>线性</td>
+            <td id="rule">
+                {{ r_doc|linebreaks }}
+            </td>
+            <td>
+                <ul>
+                    {% for i in d2_r.violation %}
+                        <li>{{i}}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>{{ d2_r.score }}</td>
+            <td>
+                <ul>
+                    {% for i in d3_r.violation %}
+                        <li>{{i}}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>{{ d3_r.score }}</td>
+        </tr>
+
+        <tr>
+            <td rowspan="6">性能</td>
+            <td>试剂空白</td>
+            <td id="rule">
+                {{ LLMI_doc|linebreaks }}
+            </td>
+            <td>
+                <ul>
+                    {% for i in d2_LLMI.violation %}
+                        <li>{{i}}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>{{d2_LLMI.score}}</td>
+            <td>
+                <ul>
+                    {% for i in d3_LLMI.violation %}
+                        <li>{{i}}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>{{d3_LLMI.score}}</td>
+        </tr>
+        <tr>
+            <td>信噪比</td>
+            <td id="rule">
+                {{ sn_doc|linebreaks }}
+            </td>
+            <td>
+                <ul>
+                    {% for i in d2_sn.violation %}
+                        <li>{{i}}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>{{d2_sn.score}}</td>
+            <td>
+                <ul>
+                    {% for i in d3_sn.violation %}
+                        <li>{{i}}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>{{d3_sn.score}}</td>
+        </tr>
+        <tr>
+            <td>Ion Ratio</td>
+            <td id="rule">
+                {{ ion_ratio_doc|linebreaks }}
+                D2目标Ion Ratio值：{{ d2_Ion_Ratio.target_Ion_Ratio}}<br />
+                D3目标Ion Ratio值：{{ d3_Ion_Ratio.target_Ion_Ratio}}
+            </td>
+            <td colspan="2">
+                <ul>
+                    <li>
+                        结果小于LOQ数量：{{ d2_Ion_Ratio.less_than_LOQ }}
+                    </li>
+                    <li>
+                        结果大于LOQ数量：{{ d2_Ion_Ratio.greater_than_LOQ }}
+                    </li>
+                    <li>
+                        通过数： {{ d2_Ion_Ratio.Pass_num }}
+                    </li>
+                    <li>
+                        未通过数： {{ d2_Ion_Ratio.NoPass_num }}
+                        {% if d2_Ion_Ratio.violation %}
+                        <ol>
+                            {% for i in d2_Ion_Ratio.violation %}
+                                <li>{{ i }}</li>
+                            {% endfor %}
+                        </ol>
+                        {% endif %}
+                    </li>
+                </ul>
+            </td>
+            <td colspan="2">
+                <ul>
+                    <li>
+                        结果小于LOQ数量：{{ d3_Ion_Ratio.less_than_LOQ }}
+                    </li>
+                    <li>
+                        结果大于LOQ数量：{{ d3_Ion_Ratio.greater_than_LOQ }}
+                    </li>
+                    <li>
+                        通过数： {{ d3_Ion_Ratio.Pass_num }}
+                    </li>
+                    <li>
+                        未通过数： {{ d3_Ion_Ratio.NoPass_num }}
+                        {% if d3_Ion_Ratio.violation %}
+                        <ol>
+                            {% for i in d3_Ion_Ratio.violation %}
+                                <li>{{ i }}</li>
+                            {% endfor %}
+                        </ol>
+                        {% endif %}
+                    </li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>内标响应</td>
+            <td id="rule">
+                {{ isarea_doc|linebreaks }}
+            </td>        
+            <td>
+                <ul>
+                    {% for plate in d2_isarea %}
+                        {% for num, value in plate.items %}
+                            {% if value.violation %}
+                                Plate{{ num }} 
+                                {% for i in value.violation %}
+                                    <li>{{i}}</li>
+                                {% endfor %}
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>
+                <ul>
+                    {% for plate in d2_isarea %}
+                        {% for num, value in plate.items %}
+                            <li>Plate{{ num }}: {{value.score}}</li>
+                        {% endfor %}
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>
+                <ul>
+                    {% for plate in d3_isarea %}
+                        {% for num, value in plate.items %}
+                            {% if value.violation %}
+                                Plate{{ num }} 
+                                {% for i in value.violation %}
+                                    <li>{{i}}</li>
+                                {% endfor %}
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>
+                <ul>
+                    {% for plate in d3_isarea %}
+                        {% for num, value in plate.items %}
+                            <li>Plate{{ num }}: {{value.score}}</li>
+                        {% endfor %}
+                    {% endfor %}
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>样品保留时间</td>
+            <td id="rule">
+                {{ rt_doc|linebreaks }}
+            </td>
+            <td>
+                <ul>
+                    {% for plate in d2_rt %}
+                        {% for num, value in plate.items %}
+                            {% if value.violation %}
+                                Plate{{ num }} 
+                                {% for i in value.violation %}
+                                    <li>{{i}}</li>
+                                {% endfor %}
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>
+                <ul>
+                    {% for plate in d2_rt %}
+                        {% for num, value in plate.items %}
+                            <li>Plate{{ num }}: {{value.score}}</li>   
+                        {% endfor %}
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>
+                <ul>
+                    {% for plate in d3_rt %}
+                        {% for num, value in plate.items %}
+                            {% if value.violation %}
+                                Plate{{ num }} 
+                                {% for i in value.violation %}
+                                    <li>{{i}}</li>
+                                {% endfor %}
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>
+                <ul>
+                    {% for plate in d3_rt %}
+                        {% for num, value in plate.items %}
+                            <li>Plate{{ num }}: {{value.score}}</li>
+                        {% endfor %}
+                    {% endfor %}
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>内标保留时间</td>
+            <td id="rule">
+                {{ isrt_doc|linebreaks }}
+            </td>
+            <td>
+                <ul>
+                    {% for plate in d2_isrt %}
+                        {% for num, value in plate.items %}
+                            {% if value.violation %}
+                                Plate{{ num }} 
+                                {% for i in value.violation %}
+                                    <li>{{i}}</li>
+                                {% endfor %}
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>
+                <ul>
+                    {% for plate in d2_isrt %}
+                        {% for num, value in plate.items %}
+                            <li>Plate{{ num }}: {{value.score}}</li>
+                        {% endfor %}
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>
+                <ul>
+                    {% for plate in d3_isrt %}
+                        {% for num, value in plate.items %}
+                            {% if value.violation %}
+                                Plate{{ num }} 
+                                {% for i in value.violation %}
+                                    <li>{{i}}</li>
+                                {% endfor %}
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>
+                <ul>
+                    {% for plate in d3_isrt %}
+                        {% for num, value in plate.items %}
+                            <li>Plate{{ num }}: {{value.score}}</li>
+                        {% endfor %}
+                    {% endfor %}
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td rowspan="4">结果</td>
+            <td>质控</td>
+            <td id="rule">
+                {{ qc_doc|linebreaks }}
+            </td>
+            <td>
+                <ul>
+                    {% for plate in d2_qc %}
+                        {% for num, value in plate.items %}
+                            {% if value.violation %}
+                                <li>Plate{{ num }} </li>
+                                {% for v in value.violation %}
+                                    <li>{{ v }}</li>
+                                {% endfor %}
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>
+                <ul>
+                    {% for plate in d2_qc %}
+                        {% for num, value in plate.items %}
+                            <li>Plate{{ num }}: {{value.score}}</li>
+                        {% endfor %}
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>
+                <ul>
+                    {% for plate in d3_qc %}
+                        {% for num, value in plate.items %}
+                            {% if value.violation %}
+                                <li>Plate{{ num }} </li>
+                                {% for v in value.violation %}
+                                    <li>{{ v }}</li>
+                                {% endfor %}
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>
+                <ul>
+                    {% for plate in d3_qc %}
+                        {% for num, value in plate.items %}
+                            <li>Plate{{ num }}: {{value.score}}</li>
+                        {% endfor %}
+                    {% endfor %}
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>定位孔</td>
+            <td id="rule">
+                {{ locate_doc|linebreaks }}
+            </td>
+            <td>
+                <ul>
+                    {% for plate in d2_locate %}
+                        {% for num, value in plate.items %}
+                            {% if value.violation %}
+                                <li>Plate{{ num }} {{value.violation|join:", "}}</li>
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>
+                <ul>
+                    {% for plate in d2_locate %}
+                        {% for num, value in plate.items %}
+                            <li>Plate{{ num }}: {{value.score}}</li>
+                        {% endfor %}
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>
+                <ul>
+                    {% for plate in d3_locate %}
+                        {% for num, value in plate.items %}
+                            {% if value.violation %}
+                                <li>Plate{{ num }} {{value.violation|join:", "}}</li>
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>
+                <ul>
+                    {% for plate in d3_locate %}
+                        {% for num, value in plate.items %}
+                            <li>Plate{{ num }}: {{value.score}}</li>
+                        {% endfor %}
+                    {% endfor %}
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>各板均值</td>
+            <td id="rule">
+                {{ patient_result_doc|linebreaks }}
+            </td>
+            <td colspan="4">
+                <table style='width:100%;'>
+                    <thead>
+                        <td>板号</td>
+                        <td>数量</td>
+                        <td>总D均值</td>
+                        <td>违反点</td>
+                        <td>分数</td>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>
+                            <ul>
+                                {% for plate in patient_result %}
+                                    {% for n, value in plate.items %}
+                                        <li>{{ n }}</li>
+                                    {% endfor %}
+                                {% endfor %}
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                {% for plate in patient_result %}
+                                    {% for n, value in plate.items %}
+                                        <li>{{ value.num }}</li>
+                                    {% endfor %}
+                                {% endfor %}
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                {% for plate in patient_result %}
+                                    {% for num, value in plate.items %}
+                                        <li>{{ value.mean }}</li>
+                                    {% endfor %}
+                                {% endfor %}
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                {% for plate in patient_result %}
+                                    {% for n, value in plate.items %}
+                                        <li>{{ value.violation|join:", " }}</li>
+                                    {% endfor %}
+                                {% endfor %}
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                {% for plate in patient_result %}
+                                    {% for n, value in plate.items %}
+                                        <li>{{ value.score }}</li>
+                                    {% endfor %}
+                                {% endfor %}
+                            </ul>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">总分</td>
+            <td colspan="2"> 
+                <ul>
+                    {% for line in d2_total_score %}
+                        {% for plate, score in line.items %}
+                            <li>Plate{{plate}}: {{score}}</li>
+                        {% endfor %}
+                    {% endfor %}
+                </ul>
+            </td>
+            <td colspan="2"> 
+                <ul>
+                    {% for line in d3_total_score %}
+                        {% for plate, score in line.items %}
+                            <li>Plate{{plate}}: {{score}}</li>
+                        {% endfor %}
+                    {% endfor %}
+                </ul>
+            </td>
+        </tr>
+    </table>
+{% endblock %}
+
+<!-- {% block result %}
+<br>
+{{chart|safe}}
+{% endblock %} -->

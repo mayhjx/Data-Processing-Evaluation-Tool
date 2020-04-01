@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block nav %}
+    <a href='/admin'>登录</a><br>
+    <!-- <a href='{% url "show_table_chart" %}'>VD结果分布</a><br> -->
+{% endblock %}
+
+{% block form %}
+    <br />
+    <form enctype="multipart/form-data" method="POST" class="form">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit" id='submit'>提交</button>
+    </form>
+{% endblock %}
+
+{% block manual %}
+    <p>说明：</p>
+    <ol>
+        <li><p>建议使用Google Chrome浏览器<a href="ftp://10.10.20.1:8081/ChromeStandaloneSetup64.exe"  download="">(下载)</a>；</p></li>
+        <li><p>仪器编号格式为字母+数字（例：YZ02）；</p></li>
+        <li><p>AB仪器软件导出数据时选择新模板，导出格式为word格式；</p></li>
+        <li><p>Waters仪器软件导出数据格式为XML格式；</p></li>
+        <li><p>Agilent的仪器软件导出数据时选择专用模板，导出格式为csv格式；</p></li>
+        <li><p>岛津的仪器软件无法导出r值；</p></li>
+        <li><p>计算内标响应时排除BLANK, TEST, 曲线, 质控和定位孔，其余数据均纳入计算；</p></li>
+        <li><p>计算保留时间时排除BLANK, TEST, 定位孔，其余数据均纳入计算；</p></li>
+        <li><p>Agilent曲线是否去点的信息无法导出，程序目前没有对其进行判断；</p></li>
+    </ol>
+{% endblock %}

@@ -1,0 +1,258 @@
+{% extends "base.html" %}
+
+{% block nav %}
+    <a href='{% url "upload" %}'>返回</a><br>
+    <a href='/#score' onclick="showscore()">打分表</a><br>
+    <a href='/#detail' onclick="showdetail()">详细信息</a><br>
+    <!-- <a href='{% url "show_table_chart" %}'>VD结果分布</a><br> -->
+{% endblock %}
+
+{% block score %}
+<table>
+    <tr>
+        <th colspan="5">文件名：{{file}}</th>
+    </tr>
+    <tr>
+        <td></td>
+        <th>内容</th>
+        <th>UAld</th>
+    </tr>
+    <tr>
+        <td rowspan="2">定量</td>
+        <td>曲线回收率</td>
+        <td>
+            {% if ALD_accuracy.score >= 8 %}
+            <span style='color: green'>合格</span>
+            {% else %}
+            <span style='color: red'>不合格</span>
+            {% endif %}
+        </td>
+    </tr>
+    <tr>
+        <td>线性</td>
+        <td>
+            {% if ALD_r.score >= 8 %}
+            <span style='color: green'>合格</span>
+            {% else %}
+            <span style='color: red'>不合格</span>
+            {% endif %}
+        </td>
+    </tr>
+    <tr>
+        <td rowspan="5">性能</td>
+        <td>试剂空白</td>
+        <td>
+            {% if ALD_LLMI.score >= 8 %}
+            <span style='color: green'>合格</span>
+            {% else %}
+            <span style='color: red'>不合格</span>
+            {% endif %}
+        </td>
+    </tr>
+    <tr>
+        <td>信噪比</td>
+        <td>
+            {% if ALD_sn.score >= 8 %}
+            <span style='color: green'>合格</span>
+            {% else %}
+            <span style='color: red'>不合格</span>
+            {% endif %}
+        </td>
+    </tr>
+    <tr>
+        <td>内标响应</td>
+        <td>
+            {% if ALD_isarea.score >= 8 %}
+            <span style='color: green'>合格</span>
+            {% else %}
+            <span style='color: red'>不合格</span>
+            {% endif %}
+        </td>
+    </tr>
+    <tr>
+        <td>样品保留时间</td>
+        <td>
+            {% if ALD_rt.score >= 8 %}
+            <span style='color: green'>合格</span>
+            {% else %}
+            <span style='color: red'>不合格</span>
+            {% endif %}
+        </td>
+    </tr>
+    <tr>
+        <td>内标保留时间</td>
+        <td>
+            {% if ALD_isrt.score >= 8 %}
+            <span style='color: green'>合格</span>
+            {% else %}
+            <span style='color: red'>不合格</span>
+            {% endif %}
+        </td>
+    </tr>
+    <tr>
+        <td rowspan="1">结果</td>
+        <td>质控</td>
+        <td>
+            {% if ALD_qc.score >= 8 %}
+            <span style='color: green'>合格</span>
+            {% else %}
+            <span style='color: red'>不合格</span>
+            {% endif %}
+        </td>
+    </tr>
+    <!-- <tr>
+        <td>定位孔</td>
+        <td>{{ALD_rt.score}}</td>
+        <td>{{NALD_rt.score}}</td>
+    </tr> -->
+    <!-- <tr>
+        <td colspan="2">总分</td>
+        <td>{{total_ALD_score}}</td>
+        <td>{{total_NALD_score}}</td>
+        <td>{{total_MT_score}}</td>
+    </tr> -->
+</table>
+{% endblock %}
+
+
+{% block detail %}
+    <table>
+        <tr>
+            <th colspan="3">评分规则</th>
+            <th colspan="2">UAld</th>
+        </tr>
+        <tr>
+            <td></td>
+            <th>内容</th>
+            <th>标准</th>
+            <th>违反点</th>
+            <th>得分</th>
+        </tr>
+        <tr>
+            <td rowspan="2">定量</td>
+            <td>曲线回收率</td>
+            <td id="rule">
+                {{ accuracy_doc|linebreaks }}
+            </td>
+            <td>
+                <ul>
+                    {% for i in ALD_accuracy.violation %}
+                        <li>{{i}}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>{{ ALD_accuracy.score }}</td>
+            
+        </tr>
+        <tr>
+            <td>线性</td>
+            <td id="rule">
+                {{ r_doc|linebreaks }}
+            </td>
+            <td>
+                <ul>
+                    {% for i in ALD_r.violation %}
+                        <li>{{i}}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>{{ ALD_r.score }}</td>
+        
+        </tr>
+        <tr>
+            <td rowspan="5">性能</td>
+            <td>试剂空白</td>
+            <td id="rule">
+                {{ LLMI_doc|linebreaks }}
+            </td>
+            <td>
+                <ul>
+                    {% for i in ALD_LLMI.violation %}
+                        <li>{{i}}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>{{ALD_LLMI.score}}</td>
+            
+        </tr>
+        <tr>
+            <td>信噪比</td>
+            <td id="rule">
+                {{ sn_doc|linebreaks }}
+            </td>
+            <td>
+                <ul>
+                    {% for i in ALD_sn.violation %}
+                        <li>{{i}}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>{{ALD_sn.score}}</td>
+            
+        </tr>
+        <tr>
+            <td>内标响应</td>
+            <td id="rule">
+                {{ isarea_doc|linebreaks }}
+            </td>        
+            <td>
+                <ul>
+                    {% for i in ALD_isarea.violation %}
+                        <li>{{i}}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>{{ALD_isarea.score}}</td>
+            
+        </tr>
+        <tr>
+            <td>样品保留时间</td>
+            <td id="rule">
+                {{ rt_doc|linebreaks }}
+            </td>
+            <td>
+                <ul>
+                    {% for i in ALD_rt.violation %}
+                        <li>{{i}}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>{{ALD_rt.score}}</td>
+            
+        </tr>
+        <tr>
+            <td>内标保留时间</td>
+            <td id="rule">
+                {{ isrt_doc|linebreaks }}
+            </td>
+            <td>
+                <ul>
+                    {% for i in ALD_isrt.violation %}
+                        <li>{{i}}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>{{ALD_isrt.score}}</td>
+            
+        </tr>
+        <tr>
+            <td rowspan="3">结果</td>
+            <td>质控</td>
+            <td id="rule">
+                {{ qc_doc|linebreaks }}
+            </td>
+            <td>
+                <ul>
+                    {% for i in ALD_qc.violation %}
+                        <li>{{i}}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>{{ALD_qc.score}}</td>
+        </tr>
+        <tr>
+            <td colspan="3">总分</td>
+            <td>{{ total_ALD_score }}</td>
+        </tr>
+    </table>
+{% endblock %}
