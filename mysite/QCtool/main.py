@@ -589,7 +589,7 @@ class Evaluation(object):
     def get_Ion_Ratio(self, data, LOQ, instrument, item):
 
         '''判断Ion Ratio值：
-        先判断样品浓度是否大于LOQ
+        先判断样品浓度是否大于某个值（自定义值或项目LOQ）
         再与仪器设定的Ion Raio标准值进行比较
         通过标准：比率<±20%'''
 
