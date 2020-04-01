@@ -1968,3 +1968,4 @@ AttributeError: 'UMNs' object has no attribute 'NAME'
 [2020-03-31 17:41:29,845] [INFO] "GET / HTTP/1.1" 200 3290
 [2020-03-31 17:41:30,523] [WARNING] Not Found: /favicon.ico
 [2020-03-31 17:41:30,524] [WARNING] "GET /favicon.ico HTTP/1.1" 404 2323
+[2020-04-01 09:43:16,622] [INFO] Watching for file changes with StatReloader
