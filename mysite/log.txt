@@ -1969,3 +1969,233 @@ AttributeError: 'UMNs' object has no attribute 'NAME'
 [2020-03-31 17:41:30,523] [WARNING] Not Found: /favicon.ico
 [2020-03-31 17:41:30,524] [WARNING] "GET /favicon.ico HTTP/1.1" 404 2323
 [2020-04-01 09:43:16,622] [INFO] Watching for file changes with StatReloader
+[2020-04-01 10:47:45,193] [INFO] Watching for file changes with StatReloader
+[2020-04-01 10:47:48,127] [INFO] "GET / HTTP/1.1" 200 3290
+[2020-04-01 10:47:48,448] [WARNING] Not Found: /favicon.ico
+[2020-04-01 10:47:48,449] [WARNING] "GET /favicon.ico HTTP/1.1" 404 2323
+[2020-04-01 10:49:20,041] [INFO] "GET / HTTP/1.1" 200 3262
+[2020-04-01 10:50:29,593] [INFO] E:\Data Processing Evaluation Tool\mysite\QCtool\Item\VD.py changed, reloading.
+[2020-04-01 10:50:30,580] [INFO] Watching for file changes with StatReloader
+[2020-04-01 10:50:40,649] [INFO] E:\Data Processing Evaluation Tool\mysite\QCtool\Item\VD.py changed, reloading.
+[2020-04-01 10:50:41,558] [INFO] Watching for file changes with StatReloader
+[2020-04-01 10:51:01,699] [ERROR] Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\lihua\AppData\Local\Programs\Python\Python37\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\lihua\AppData\Local\Programs\Python\Python37\lib\site-packages\django\core\handlers\base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\lihua\AppData\Local\Programs\Python\Python37\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "E:\Data Processing Evaluation Tool\mysite\QCtool\views.py", line 29, in file_upload
+    raise e
+  File "E:\Data Processing Evaluation Tool\mysite\QCtool\views.py", line 27, in file_upload
+    content = handle_uploaded_file(file, item, num, types)
+  File "E:\Data Processing Evaluation Tool\mysite\QCtool\Item\handle.py", line 23, in handle_uploaded_file
+    return vd.output()
+  File "E:\Data Processing Evaluation Tool\mysite\QCtool\Item\VD.py", line 527, in output
+    dic = self.get_dic_data()
+  File "E:\Data Processing Evaluation Tool\mysite\QCtool\Item\VD.py", line 297, in get_dic_data
+    dic = self.AB_data_format_docx()
+  File "E:\Data Processing Evaluation Tool\mysite\QCtool\Item\VD.py", line 232, in AB_data_format_docx
+    raise
+RuntimeError: No active exception to reraise
+[2020-04-01 10:51:01,917] [ERROR] "POST / HTTP/1.1" 500 89864
+[2020-04-01 10:51:19,847] [INFO] E:\Data Processing Evaluation Tool\mysite\QCtool\Item\VD.py changed, reloading.
+[2020-04-01 10:51:20,811] [INFO] Watching for file changes with StatReloader
+[2020-04-01 10:51:21,515] [ERROR] Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\lihua\AppData\Local\Programs\Python\Python37\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\lihua\AppData\Local\Programs\Python\Python37\lib\site-packages\django\core\handlers\base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\lihua\AppData\Local\Programs\Python\Python37\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "E:\Data Processing Evaluation Tool\mysite\QCtool\views.py", line 29, in file_upload
+    raise e
+  File "E:\Data Processing Evaluation Tool\mysite\QCtool\views.py", line 27, in file_upload
+    content = handle_uploaded_file(file, item, num, types)
+  File "E:\Data Processing Evaluation Tool\mysite\QCtool\Item\handle.py", line 23, in handle_uploaded_file
+    return vd.output()
+  File "E:\Data Processing Evaluation Tool\mysite\QCtool\Item\VD.py", line 526, in output
+    dic = self.get_dic_data()
+  File "E:\Data Processing Evaluation Tool\mysite\QCtool\Item\VD.py", line 296, in get_dic_data
+    dic = self.AB_data_format_docx()
+  File "E:\Data Processing Evaluation Tool\mysite\QCtool\Item\VD.py", line 261, in AB_data_format_docx
+    raise
+RuntimeError: No active exception to reraise
+[2020-04-01 10:51:21,562] [ERROR] "POST / HTTP/1.1" 500 95817
+[2020-04-01 10:52:30,149] [INFO] E:\Data Processing Evaluation Tool\mysite\QCtool\Item\VD.py changed, reloading.
+[2020-04-01 10:52:31,009] [INFO] Watching for file changes with StatReloader
+[2020-04-01 10:52:33,527] [ERROR] Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\lihua\AppData\Local\Programs\Python\Python37\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\lihua\AppData\Local\Programs\Python\Python37\lib\site-packages\django\core\handlers\base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\lihua\AppData\Local\Programs\Python\Python37\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "E:\Data Processing Evaluation Tool\mysite\QCtool\views.py", line 29, in file_upload
+    raise e
+  File "E:\Data Processing Evaluation Tool\mysite\QCtool\views.py", line 27, in file_upload
+    content = handle_uploaded_file(file, item, num, types)
+  File "E:\Data Processing Evaluation Tool\mysite\QCtool\Item\handle.py", line 23, in handle_uploaded_file
+    return vd.output()
+  File "E:\Data Processing Evaluation Tool\mysite\QCtool\Item\VD.py", line 545, in output
+    data = self.get_totalDmean(dic)
+  File "E:\Data Processing Evaluation Tool\mysite\QCtool\Item\VD.py", line 397, in get_totalDmean
+    conc = data['D2'][0].index(self.CONC)
+ValueError: 'Calculated Conc.(nmol/L)' is not in list
+[2020-04-01 10:52:33,582] [ERROR] "POST / HTTP/1.1" 500 101698
+[2020-04-01 10:53:47,963] [INFO] E:\Data Processing Evaluation Tool\mysite\QCtool\Item\VD.py changed, reloading.
+[2020-04-01 10:53:48,862] [INFO] Watching for file changes with StatReloader
+[2020-04-01 10:53:49,463] [INFO] 提交数据:数据导出-YZ18.docx
+[2020-04-01 10:53:49,523] [INFO] "POST / HTTP/1.1" 200 26544
+[2020-04-01 10:53:52,129] [INFO] "GET / HTTP/1.1" 200 3262
+[2020-04-01 10:53:55,747] [INFO] "GET /admin HTTP/1.1" 301 0
+[2020-04-01 10:53:55,810] [INFO] "GET /admin/ HTTP/1.1" 302 0
+[2020-04-01 10:53:56,108] [INFO] "GET /admin/login/?next=/admin/ HTTP/1.1" 200 1816
+[2020-04-01 10:53:56,270] [INFO] "GET /static/admin/css/login.css HTTP/1.1" 200 1233
+[2020-04-01 10:53:56,272] [INFO] "GET /static/admin/css/base.css HTTP/1.1" 200 16378
+[2020-04-01 10:53:56,273] [INFO] "GET /static/admin/css/responsive.css HTTP/1.1" 200 17944
+[2020-04-01 10:53:56,298] [INFO] "GET /static/admin/css/fonts.css HTTP/1.1" 200 423
+[2020-04-01 10:53:56,374] [INFO] "GET /static/admin/fonts/Roboto-Light-webfont.woff HTTP/1.1" 200 85692
+[2020-04-01 10:53:56,385] [INFO] "GET /static/admin/fonts/Roboto-Regular-webfont.woff HTTP/1.1" 200 85876
+[2020-04-01 10:54:01,126] [INFO] "POST /admin/login/?next=/admin/ HTTP/1.1" 302 0
+[2020-04-01 10:54:01,170] [INFO] "GET /admin/ HTTP/1.1" 200 7951
+[2020-04-01 10:54:01,179] [INFO] "GET /static/admin/css/dashboard.css HTTP/1.1" 200 412
+[2020-04-01 10:54:01,194] [INFO] "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 200 380
+[2020-04-01 10:54:01,207] [INFO] "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 200 331
+[2020-04-01 10:54:01,210] [INFO] "GET /static/admin/fonts/Roboto-Bold-webfont.woff HTTP/1.1" 200 86184
+[2020-04-01 10:54:02,287] [INFO] "GET /admin/QCtool/ionratioframe/ HTTP/1.1" 200 6325
+[2020-04-01 10:54:02,295] [INFO] "GET /static/admin/css/changelists.css HTTP/1.1" 200 6170
+[2020-04-01 10:54:02,332] [INFO] "GET /static/admin/js/jquery.init.js HTTP/1.1" 200 363
+[2020-04-01 10:54:02,352] [INFO] "GET /static/admin/js/actions.js HTTP/1.1" 200 6766
+[2020-04-01 10:54:02,352] [INFO] "GET /static/admin/js/urlify.js HTTP/1.1" 200 8941
+[2020-04-01 10:54:02,353] [INFO] "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 200 6918
+[2020-04-01 10:54:02,353] [INFO] "GET /static/admin/js/core.js HTTP/1.1" 200 7099
+[2020-04-01 10:54:02,353] [INFO] "GET /admin/jsi18n/ HTTP/1.1" 200 7722
+[2020-04-01 10:54:02,400] [INFO] "GET /static/admin/js/prepopulate.js HTTP/1.1" 200 1530
+[2020-04-01 10:54:02,412] [INFO] "GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 200 271817
+[2020-04-01 10:54:02,413] [INFO] "GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 200 128820
+[2020-04-01 10:54:02,518] [INFO] "GET /static/admin/img/tooltag-add.svg HTTP/1.1" 200 331
+[2020-04-01 10:54:04,374] [INFO] "GET /admin/QCtool/ionratioframe/add/ HTTP/1.1" 200 5023
+[2020-04-01 10:54:04,387] [INFO] "GET /admin/jsi18n/ HTTP/1.1" 200 7722
+[2020-04-01 10:54:04,388] [INFO] "GET /static/admin/js/prepopulate_init.js HTTP/1.1" 200 495
+[2020-04-01 10:54:04,390] [INFO] "GET /static/admin/css/forms.css HTTP/1.1" 200 8518
+[2020-04-01 10:54:04,426] [INFO] "GET /static/admin/js/change_form.js HTTP/1.1" 200 712
+[2020-04-01 10:54:04,429] [INFO] "GET /static/admin/css/widgets.css HTTP/1.1" 200 10340
+[2020-04-01 10:54:25,270] [INFO] "POST /admin/QCtool/ionratioframe/add/ HTTP/1.1" 302 0
+[2020-04-01 10:54:25,326] [INFO] "GET /admin/QCtool/ionratioframe/ HTTP/1.1" 200 6911
+[2020-04-01 10:54:25,339] [INFO] "GET /admin/jsi18n/ HTTP/1.1" 200 7722
+[2020-04-01 10:54:25,363] [INFO] "GET /static/admin/img/icon-yes.svg HTTP/1.1" 200 436
+[2020-04-01 10:54:34,811] [INFO] "GET /admin/QCtool/ionratioframe/add/ HTTP/1.1" 200 5023
+[2020-04-01 10:54:34,826] [INFO] "GET /admin/jsi18n/ HTTP/1.1" 200 7722
+[2020-04-01 10:54:40,604] [INFO] "POST /admin/QCtool/ionratioframe/add/ HTTP/1.1" 302 0
+[2020-04-01 10:54:40,652] [INFO] "GET /admin/QCtool/ionratioframe/ HTTP/1.1" 200 7208
+[2020-04-01 10:54:40,664] [INFO] "GET /admin/jsi18n/ HTTP/1.1" 200 7722
+[2020-04-01 10:54:42,683] [INFO] "GET / HTTP/1.1" 200 3262
+[2020-04-01 10:54:54,699] [INFO] 提交数据:数据导出-YZ18.docx
+[2020-04-01 10:54:54,746] [INFO] "POST / HTTP/1.1" 200 26551
+[2020-04-01 10:54:56,513] [INFO] "GET / HTTP/1.1" 200 3262
+[2020-04-01 10:55:05,688] [INFO] 提交数据:YZ18-20200330-S1-质量评估工具.docx
+[2020-04-01 10:55:05,719] [INFO] "POST / HTTP/1.1" 200 28304
+[2020-04-01 10:57:15,998] [INFO] E:\Data Processing Evaluation Tool\mysite\QCtool\Item\VD.py changed, reloading.
+[2020-04-01 10:57:16,877] [INFO] Watching for file changes with StatReloader
+[2020-04-01 10:57:40,467] [INFO] "GET / HTTP/1.1" 200 3262
+[2020-04-01 10:57:41,429] [INFO] "GET /admin/ HTTP/1.1" 200 7945
+[2020-04-01 10:57:43,402] [INFO] "GET /admin/QCtool/ionratioframe/ HTTP/1.1" 200 6999
+[2020-04-01 10:57:43,419] [INFO] "GET /admin/jsi18n/ HTTP/1.1" 200 7722
+[2020-04-01 10:57:44,967] [INFO] "GET /admin/QCtool/ionratioframe/add/ HTTP/1.1" 200 5023
+[2020-04-01 10:57:44,979] [INFO] "GET /admin/jsi18n/ HTTP/1.1" 200 7722
+[2020-04-01 10:58:11,837] [INFO] "POST /admin/QCtool/ionratioframe/add/ HTTP/1.1" 302 0
+[2020-04-01 10:58:11,887] [INFO] "GET /admin/QCtool/ionratioframe/ HTTP/1.1" 200 7585
+[2020-04-01 10:58:11,901] [INFO] "GET /admin/jsi18n/ HTTP/1.1" 200 7722
+[2020-04-01 10:58:27,000] [INFO] "GET /admin/QCtool/ionratioframe/add/ HTTP/1.1" 200 5023
+[2020-04-01 10:58:27,013] [INFO] "GET /admin/jsi18n/ HTTP/1.1" 200 7722
+[2020-04-01 10:58:35,072] [INFO] "POST /admin/QCtool/ionratioframe/add/ HTTP/1.1" 302 0
+[2020-04-01 10:58:35,138] [INFO] "GET /admin/QCtool/ionratioframe/ HTTP/1.1" 200 7882
+[2020-04-01 10:58:35,149] [INFO] "GET /admin/jsi18n/ HTTP/1.1" 200 7722
+[2020-04-01 10:58:38,854] [INFO] "GET / HTTP/1.1" 200 3262
+[2020-04-01 10:58:52,437] [INFO] 提交数据:YZ21-20200330-质量评估工具.txt
+[2020-04-01 10:58:52,510] [INFO] "POST / HTTP/1.1" 200 36054
+[2020-04-01 10:59:06,403] [INFO] "GET / HTTP/1.1" 200 3262
+[2020-04-01 10:59:36,248] [INFO] 提交数据:daojin-YZ21-test.txt
+[2020-04-01 10:59:36,292] [INFO] "POST / HTTP/1.1" 200 26501
+[2020-04-01 11:00:11,060] [INFO] E:\Data Processing Evaluation Tool\mysite\QCtool\Item\VD.py changed, reloading.
+[2020-04-01 11:00:12,018] [INFO] Watching for file changes with StatReloader
+[2020-04-01 11:00:12,894] [ERROR] Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\lihua\AppData\Local\Programs\Python\Python37\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\lihua\AppData\Local\Programs\Python\Python37\lib\site-packages\django\core\handlers\base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\lihua\AppData\Local\Programs\Python\Python37\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "E:\Data Processing Evaluation Tool\mysite\QCtool\views.py", line 29, in file_upload
+    raise e
+  File "E:\Data Processing Evaluation Tool\mysite\QCtool\views.py", line 27, in file_upload
+    content = handle_uploaded_file(file, item, num, types)
+  File "E:\Data Processing Evaluation Tool\mysite\QCtool\Item\handle.py", line 23, in handle_uploaded_file
+    return vd.output()
+  File "E:\Data Processing Evaluation Tool\mysite\QCtool\Item\VD.py", line 526, in output
+    dic = self.get_dic_data()
+  File "E:\Data Processing Evaluation Tool\mysite\QCtool\Item\VD.py", line 300, in get_dic_data
+    dic = self.daojin_data()
+  File "E:\Data Processing Evaluation Tool\mysite\QCtool\Item\VD.py", line 209, in daojin_data
+    raise
+RuntimeError: No active exception to reraise
+[2020-04-01 11:00:13,123] [ERROR] "POST / HTTP/1.1" 500 103662
+[2020-04-01 11:01:05,338] [INFO] "GET / HTTP/1.1" 200 3262
+[2020-04-01 11:01:05,588] [WARNING] Not Found: /favicon.ico
+[2020-04-01 11:01:05,589] [WARNING] "GET /favicon.ico HTTP/1.1" 404 2323
+[2020-04-01 11:01:50,939] [ERROR] Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\lihua\AppData\Local\Programs\Python\Python37\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\lihua\AppData\Local\Programs\Python\Python37\lib\site-packages\django\core\handlers\base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\lihua\AppData\Local\Programs\Python\Python37\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "E:\Data Processing Evaluation Tool\mysite\QCtool\views.py", line 29, in file_upload
+    raise e
+  File "E:\Data Processing Evaluation Tool\mysite\QCtool\views.py", line 27, in file_upload
+    content = handle_uploaded_file(file, item, num, types)
+  File "E:\Data Processing Evaluation Tool\mysite\QCtool\Item\handle.py", line 23, in handle_uploaded_file
+    return vd.output()
+  File "E:\Data Processing Evaluation Tool\mysite\QCtool\Item\VD.py", line 526, in output
+    dic = self.get_dic_data()
+  File "E:\Data Processing Evaluation Tool\mysite\QCtool\Item\VD.py", line 300, in get_dic_data
+    dic = self.daojin_data()
+  File "E:\Data Processing Evaluation Tool\mysite\QCtool\Item\VD.py", line 209, in daojin_data
+    raise
+RuntimeError: No active exception to reraise
+[2020-04-01 11:01:51,970] [ERROR] "POST / HTTP/1.1" 500 103979
+[2020-04-01 11:04:11,360] [INFO] E:\Data Processing Evaluation Tool\mysite\QCtool\Item\VD.py changed, reloading.
+[2020-04-01 11:04:12,299] [INFO] Watching for file changes with StatReloader
+[2020-04-01 11:04:14,979] [INFO] 提交数据:YZ21-20200330-质量评估工具.txt
+[2020-04-01 11:04:15,045] [INFO] "POST / HTTP/1.1" 200 36697
+[2020-04-01 11:05:57,192] [INFO] "GET / HTTP/1.1" 200 3262
+[2020-04-01 11:06:09,158] [INFO] 提交数据:YZ21-20200330-质量评估工具.txt
+[2020-04-01 11:06:09,193] [INFO] "POST / HTTP/1.1" 200 34998
+[2020-04-01 11:08:52,696] [INFO] E:\Data Processing Evaluation Tool\mysite\QCtool\Item\VD.py changed, reloading.
+[2020-04-01 11:08:53,590] [INFO] Watching for file changes with StatReloader
+[2020-04-01 11:09:00,956] [INFO] E:\Data Processing Evaluation Tool\mysite\QCtool\Item\VD.py changed, reloading.
+[2020-04-01 11:09:01,875] [INFO] Watching for file changes with StatReloader
+[2020-04-01 11:09:05,364] [INFO] 提交数据:YZ21-20200330-质量评估工具.txt
+[2020-04-01 11:09:05,459] [INFO] "POST / HTTP/1.1" 200 35083
+[2020-04-01 11:09:24,937] [INFO] "GET / HTTP/1.1" 200 3262
+[2020-04-01 11:09:33,552] [INFO] 提交数据:YZ02-20200330-S1-质量评估工具.docx
+[2020-04-01 11:09:33,604] [INFO] "POST / HTTP/1.1" 200 37280
+[2020-04-01 11:09:43,813] [INFO] "GET / HTTP/1.1" 200 3262
+[2020-04-01 11:09:54,970] [INFO] 提交数据:YZ18-20200330-S1-质量评估工具.docx
+[2020-04-01 11:09:55,016] [INFO] "POST / HTTP/1.1" 200 28518
+[2020-04-01 11:10:35,517] [INFO] E:\Data Processing Evaluation Tool\mysite\QCtool\Item\VD.py changed, reloading.
+[2020-04-01 11:10:36,483] [INFO] Watching for file changes with StatReloader
+[2020-04-01 11:10:41,552] [INFO] E:\Data Processing Evaluation Tool\mysite\QCtool\Item\VD.py changed, reloading.
+[2020-04-01 11:10:42,463] [INFO] Watching for file changes with StatReloader
+[2020-04-01 11:11:31,973] [INFO] 提交数据:YZ18-20200330-S1-质量评估工具.docx
+[2020-04-01 11:11:32,043] [INFO] "POST / HTTP/1.1" 200 28767
+[2020-04-01 11:11:44,648] [INFO] 提交数据:YZ18-20200330-S1-质量评估工具.docx
+[2020-04-01 11:11:44,685] [INFO] "POST / HTTP/1.1" 200 28987
+[2020-04-01 11:12:03,114] [INFO] 提交数据:YZ18-20200330-S1-质量评估工具.docx
+[2020-04-01 11:12:03,155] [INFO] "POST / HTTP/1.1" 200 29202

@@ -38,16 +38,16 @@ class VD(Evaluation):
                 self.LOCATE = 'X'  # 定位孔实验号前缀
             elif self.f.name.endswith(".docx"):
                 self.NAME = 'Sample Name'
-                self.ActualConc = "Target  [Conc].(nmol/L)"
-                self.CONC = 'Calculated Conc.(nmol/L)'
-                self.ACCURACY = "Accuracy(%)"
+                self.ActualConc = "Target  [Conc]."
+                self.CONC = 'Calculated Conc.'
+                self.ACCURACY = "Accuracy"
                 self.SN = 'S/N '
                 self.USED = '[Use Record]'
                 self.R = 'R2'
-                self.Area = 'Area (cps)'
-                self.ISArea = 'IS Area(cps)'
-                self.RT = 'RT (min)'
-                self.ISRT = 'IS Retention Time (min)'
+                self.Area = 'Area '
+                self.ISArea = 'IS Area'
+                self.RT = 'RT '
+                self.ISRT = 'IS Retention Time '
                 self.IonRatio = "MRM Ratio"
                 self.LOCATE = 'X'  # 定位孔实验号前缀
         elif self.instrument_type == "Agilent":
@@ -76,7 +76,7 @@ class VD(Evaluation):
             self.R = None
             self.Area = '面积'
             self.ISArea = '内标面积'
-            self.IonRatio = None
+            self.IonRatio = "Ref.1 测定%"
             self.RT = '保留时间'
             self.ISRT = '内标保留时间'
             self.LOCATE = 'X'  # 定位孔实验号前缀
@@ -206,7 +206,7 @@ class VD(Evaluation):
             # 最后一个元素不为空则为样品数据
             if d[0] not in ['ID#', 'Name'] and d[-1]:
                 dic[k].append(d)
-        
+        # raise
         return dic
 
     def AB_data_format_docx(self):
@@ -229,7 +229,6 @@ class VD(Evaluation):
         D2table = docx.tables[1]
         D3table = docx.tables[5]
 
-
         def read_table_data(table):
             # table 是一个Document.table对象
             # 优化读取table的速度，由8s优化到0.12s
@@ -241,6 +240,7 @@ class VD(Evaluation):
             datas = []
             for i in range(ROWS* COLUMNS):
                 text = cells[i].text.replace("\n", "")
+                text = text.split("(")[0] # 去除MRM Ratio列中括号内的值
                 if i % 12 != 0 or i == 0:
                     data.append(text)
                     continue
@@ -642,6 +642,7 @@ class VD(Evaluation):
 
                 output['d3_total_score'].append(dict([(plate, plate0_score+plate_score)]))
 
-        output["d2_Ion_Ratio"] = self.get_Ion_Ratio(dic[self.D2], self.D2_LLMI, self.instrument_prefix + self.instrument_num, self.D2)
-        output["d3_Ion_Ratio"] = self.get_Ion_Ratio(dic[self.D3], self.D3_LLMI, self.instrument_prefix + self.instrument_num, self.D3)
+        output["selfdefine_LOQ"] = 5
+        output["d2_Ion_Ratio"] = self.get_Ion_Ratio(dic[self.D2], output["selfdefine_LOQ"], self.instrument_prefix + self.instrument_num, self.D2)
+        output["d3_Ion_Ratio"] = self.get_Ion_Ratio(dic[self.D3], output["selfdefine_LOQ"], self.instrument_prefix + self.instrument_num, self.D3)
         return output
